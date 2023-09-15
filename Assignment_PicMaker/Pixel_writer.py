@@ -1,8 +1,8 @@
 myfile = open("Pixel.ppm", "a")
 myfile.truncate(0)
 global height, width, written, maxcol
-height = 500
-width = 500
+height = 50
+width = 100
 maxcol = 255
 def checkerboard():
     startcol = 255
@@ -21,7 +21,7 @@ def checkerboard():
                     written += "0 0 0"
             written += "  "
         written += "\n\n"
-        if startcol > 5:
+        if startcol > 0:
             startcol -= 5
     myfile.write(written)
     myfile.close
