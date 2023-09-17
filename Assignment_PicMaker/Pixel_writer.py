@@ -1,27 +1,24 @@
-myfile = open("Pixel.ppm", "a")
+myfile = open("Pixel.PPM", "a")
 myfile.truncate(0)
-global height, width, written, maxcol
-height = 50
-width = 100
+height = 500
+width = 500
 maxcol = 255
-def checkerboard():
-    startcol = 255
+
+def ombre(col_1, col_2, ombrelen, isdone):
     written = "P3\n" + str(width) + " " + str(height) + "\n" + str(maxcol) + "\n"
     for i in range(height):
+        if(i % ombrelen == 0):
+            for k in range(3):
+                if(col_1[k] < col_2[k]):
+                    col_1[k] += 1
+                elif(col_1[k] == col_2[k]):
+                    col_1[k] = col_1[k]
+                else:
+                    col_1[k] -= 1
         for j in range(width):
-            if(i%2 == 0):
-                if(j%2 == 0):
-                    written += (str(startcol) + " ") * 3
-                else:
-                    written += "0 0 0"
-            else:
-                if(j%2 != 0):
-                    written += (str(startcol) + " ") * 3
-                else:
-                    written += "0 0 0"
-            written += "  "
-        written += "\n\n"
-        if startcol > 0:
-            startcol -= 5
+            written += str(col_1[0]) + " " + str(col_1[1]) + " " + str(col_1[2]) + " "
+    if isdone:
+        fin(written)
+def fin(written):
     myfile.write(written)
-    myfile.close
+    myfile.close()
