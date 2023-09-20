@@ -1,28 +1,17 @@
-import math
-myfile = open("Line.PPM", "a")
-myfile.truncate(0)
-height = 500
-width = 500
-maxcol = 255
-
-def line(x_0, y_0, x_1, y_1, col):
-    written = "P3\n" + str(width) + " " + str(height) + "\n" + str(maxcol) + "\n"
-    m = slope(x_0, y_0, x_1, y_1)
-    print(m)
-    errortol = 0.5
-    for i in range(height):
-        for j in range(width):
-            currm = slope(x_0, y_0, j, i)
-            if(currm <= math.ceil(m+errortol) and currm >= math.floor(m-errortol)):
-                written += str(col[0]) + " " + str(col[1]) + " " + str(col[2]) + "  "
-            else:
-                written += (str(255) + " ") * 3 + " "
-        written += "\n"
-    myfile.write(written)
-    myfile.close
-
-def slope(x_0, y_0, x_1, y_1):
-    if(x_0 == x_1):
-        return 0
+def lineup(x_0, y_0, x_1, y_1):
+  x = x_0
+  y = y_0
+  while(x <= x_1):
+    print("(" + str(x) + ", " + str(y) + ")")
+    d = f(x_0, y_0, x_1, y_1, x, y)
+    midpt = f(x_0, y_0, x_1, y_1, x, y + 0.5)
+    if(abs(midpt) > abs(d)):
+      x = x + 1
+      y = y + 1
     else:
-        return (y_1 - y_0) / (x_1 - x_0)
+      x = x + 1
+
+def f(x_0, y_0, x_1, y_1, x, y):
+  a = y_1 - y_0
+  b = -(x_1 - x_0)
+  return (x * a + b * y)
