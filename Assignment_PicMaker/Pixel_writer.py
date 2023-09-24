@@ -4,7 +4,7 @@ height = 500
 width = 500
 maxcol = 255
 
-def ombre(col_1, col_2, ombrelen, isdone):
+def ombre(col_1, col_2, ombrelen):
     written = "P3\n" + str(width) + " " + str(height) + "\n" + str(maxcol) + "\n"
     for i in range(height):
         if(i % ombrelen == 0):
@@ -17,8 +17,5 @@ def ombre(col_1, col_2, ombrelen, isdone):
                     col_1[k] -= 1
         for j in range(width):
             written += str(col_1[0]) + " " + str(col_1[1]) + " " + str(col_1[2]) + " "
-    if isdone:
-        fin(written)
-def fin(written):
     myfile.write(written)
-    myfile.close()
+    myfile.close
